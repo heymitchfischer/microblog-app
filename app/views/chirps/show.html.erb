@@ -1,2 +1,4 @@
 <h3><%= @chirp.formatted_time %></h3>
 <p><%= @chirp.content %></p>
+<%= link_to("Edit", "/chirps/#{@chirp.id}/edit") %>
+<%= link_to("Delete", "/chirps/#{@chirp.id}", method: :delete, data: {confirm: "Are you absolutely sure you want to delete this?"}) %>
