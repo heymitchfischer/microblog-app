@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do 
   get '/' => 'chirps#index'
   get '/chirps' => 'chirps#index'
   get '/chirps/new' => 'chirps#new'
