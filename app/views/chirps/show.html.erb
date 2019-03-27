@@ -1,20 +1,21 @@
 <h3><%= @chirp.formatted_time %></h3>
 <p><%= @chirp.content %></p>
-<%= link_to("Edit", "/chirps/#{@chirp.id}/edit") %>
-<%= link_to("Delete", "/chirps/#{@chirp.id}", method: :delete, data: {confirm: "Are you absolutely sure you want to delete this?"}) %>
+<%= link_to("Edit", "/chirps/#{@chirp.id}/edit", class: "btn btn-secondary") %>
+<%= link_to("Delete", "/chirps/#{@chirp.id}", method: :delete, data: {confirm: "Are you absolutely sure you want to delete this?"}, class: "btn btn-danger") %>
 
-
-<%= form_tag("/chirps/#{@chirp.id}/comments", method: :post) do %>
-  <div class="form-group">
-    <%= label_tag(:content, "Leave a comment:") %>
-    <%= text_area_tag(:content, nil, size: '40x10', class: "form-control") %>
-  </div>
-  <%= submit_tag("Add comment", class: "btn btn-primary") %>
+<% if user_signed_in? %>
+  <%= form_tag("/chirps/#{@chirp.id}/comments", method: :post) do %>
+    <div class="form-group">
+      <%= label_tag(:content, "Leave a comment:") %>
+      <%= text_area_tag(:content, nil, class: "form-control") %>
+    </div>
+    <%= submit_tag("Add Comment", class: "btn btn-success") %>
+  <% end %>
 <% end %>
 
 
 <h4>Comments:</h4>
 <% @chirp.comments.each do |comment| %>
   <p><%= comment.content %></p>
-  <%= link_to("Delete", "/chirps/#{@chirp.id}/comments/#{comment.id}", method: :delete) %>
+  <%= link_to("Delete Comment", "/chirps/#{@chirp.id}/comments/#{comment.id}", method: :delete, class: "btn btn-danger") %>
 <% end %>
