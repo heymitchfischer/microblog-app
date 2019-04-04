@@ -1,9 +1,21 @@
 <h1>What's on your mind?</h1>
 
+<% if @chirp.errors.any? %>
+  <div id="error-explanation">
+    <h2><%= pluralize(@chirp.errors.count, "error") %> prevented this Chirp from being posted:</h2>
+
+    <ul>
+      <% @chirp.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_tag("/chirps", method: :post) do %>
   <div class="form-group">
     <%= label_tag('content', 'Enter Chirp content:') %>
-    <%= text_area_tag('content', nil, class: "form-control") %>
+    <%= text_area_tag('content', @chirp.content, class: "form-control") %>
   </div>
   <%= submit_tag("Create Chirp!", class: "btn btn-success") %>
 <% end %>

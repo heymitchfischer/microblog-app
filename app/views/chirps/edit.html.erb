@@ -1,5 +1,17 @@
 <h1>Edit Your Chirp</h1>
 
+<% if @chirp.errors.any? %>
+  <div id="error-explanation">
+    <h2><%= pluralize(@chirp.errors.count, "error") %> prevented this Chirp from being updated:</h2>
+
+    <ul>
+      <% @chirp.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_tag("/chirps/#{@chirp.id}", method: :put) do %>
   <div class="form-group">
     <%= label_tag('content', 'Edit Chirp content:') %>

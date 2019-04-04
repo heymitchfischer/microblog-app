@@ -4,10 +4,22 @@
 <%= link_to("Delete", "/chirps/#{@chirp.id}", method: :delete, data: {confirm: "Are you absolutely sure you want to delete this?"}, class: "btn btn-danger") %>
 
 <% if user_signed_in? %>
+  <% if @comment.errors.any? %>
+    <div id="error-explanation" class="button-margin">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prevented this Comment from being posted:</h2>
+
+      <ul>
+        <% @comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= form_tag("/chirps/#{@chirp.id}/comments", method: :post) do %>
     <div class="form-group">
       <%= label_tag(:content, "Leave a comment:") %>
-      <%= text_area_tag(:content, nil, class: "form-control") %>
+      <%= text_area_tag(:content, @comment.content, class: "form-control") %>
     </div>
     <%= submit_tag("Add Comment", class: "btn btn-success") %>
   <% end %>

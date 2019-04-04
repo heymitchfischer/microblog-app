@@ -1,5 +1,5 @@
 class ChirpsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:show]
 
   def index
     @chirps = Chirp.all
@@ -7,17 +7,21 @@ class ChirpsController < ApplicationController
 
   def show
     @chirp = Chirp.find(params[:id])
+    @comment = Comment.new
   end
 
   def new
-    
+    @chirp = Chirp.new
   end
 
   def create
-    chirp = Chirp.new(content: params[:content])
-    chirp.save
-    flash[:success] = "Chirp successfully created!"
-    redirect_to "/chirps"
+    @chirp = Chirp.new(content: params[:content])
+    if @chirp.save
+      flash[:success] = "Chirp successfully created!"
+      redirect_to "/chirps"
+    else
+      render 'new'
+    end
   end
 
   def edit
@@ -25,10 +29,14 @@ class ChirpsController < ApplicationController
   end
 
   def update
-    chirp = Chirp.find(params[:id])
-    chirp.update(content: params[:content])
-    flash[:success] = "Chirp was updated!"
-    redirect_to "/chirps/#{chirp.id}"
+    @chirp = Chirp.find(params[:id]) 
+
+    if @chirp.update(content: params[:content])
+      flash[:success] = "Chirp was updated!"
+      redirect_to "/chirps/#{@chirp.id}"
+    else
+      render 'edit'
+    end
   end
 
   def destroy
