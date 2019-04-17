@@ -3,7 +3,8 @@
 
   <% @chirps.each do |chirp| %>
     <div class="chirp">
-      <h3><%= chirp.formatted_time %></h3>
+      <big><%= chirp.user.first_name %> <%= chirp.user.last_name %></big>
+      <small><%= chirp.formatted_time %></small>
       <p><%= link_to("#{chirp.content}", "/chirps/#{chirp.id}") %></p>
     </div>
   <% end %>
