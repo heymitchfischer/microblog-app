@@ -22,7 +22,7 @@
     <% end %>
 
 
-    <%= form_tag("/chirps/#{@chirp.id}/comments", method: :post) do %>
+    <%= form_tag("/chirps/#{@chirp.id}/comments", method: :post, id: "comments-form") do %>
       <div class="form-group">
         <%= label_tag(:content, "Leave a comment:") %>
         <%= text_area_tag(:content, @comment.content, class: "form-control") %>

@@ -5,7 +5,7 @@
 <% if current_user.id == @user.id %>
 
 <% elsif !current_user.followees.include?(@user) %>
-  <%= link_to("Follow", "/users/#{@user.id}/relationships", method: :post, class: "btn btn-dark") %>
+  <%= link_to("Follow", "/users/#{@user.id}/relationships", method: :post, class: "btn btn-dark follow-link") %>
 <% else %>
   <p class="text-muted">You're following <%= @user.first_name %></p>
 <% end %>
