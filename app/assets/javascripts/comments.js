@@ -5,6 +5,8 @@ $(document).ready(function() {
   var $token = $('meta[name="csrf-token"]').prop("content");
   var $commentContent = $("#content");
 
+  console.log("Hello!");
+
   $newCommentButton.on("click", function() {
     event.preventDefault();
 
