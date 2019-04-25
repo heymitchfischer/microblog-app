@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :followees, through: :active_relationships
   has_many :comments
   has_many :chirps
+  has_one_attached :profile_image
   validates :first_name, presence: true, length: {maximum: 30}
   validates :last_name, presence: true, length: {maximum: 30}
 end
